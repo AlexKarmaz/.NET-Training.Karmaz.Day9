@@ -1,4 +1,5 @@
-﻿using NLog;
+﻿using BookService;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,13 +14,27 @@ namespace BookService
         private IRepository<Book> Repository { get; }
         /// <summary>Get all books from repository</summary>
         public IEnumerable<Book> Books => Repository.GetAllItems();
-        private static Logger logger = LogManager.GetCurrentClassLogger();
 
-        public BookListService(IRepository<Book> repository)
+        private readonly ILogger logger;
+
+        public BookListService(IRepository<Book> repository, ILogger logger)
         {
             Repository = repository;
+
+            if (ReferenceEquals(logger, null))
+                logger = NLogProvider.GetLogger(nameof(BookListService));
+
+            logger.Debug("Constructor {0} with two parameters is started.", nameof(BookListService));
         }
 
+        public BookListService(ILogger logger)
+        {
+            if (ReferenceEquals(logger, null))
+                logger = NLogProvider.GetLogger(nameof(BookListService));
+
+            logger.Debug("Constructor {0} with one parameter is started.", nameof(BookListService));
+            this.logger = logger;
+        }
         #region Public methods
         /// <summary>Add book to repository</summary>
         /// <param name="book">Book to add</param>

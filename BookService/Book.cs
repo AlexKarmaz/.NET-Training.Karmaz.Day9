@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BookService
 {
-    public class Book : IEquatable<Book>, IComparable<Book>
+    public class Book : IEquatable<Book>, IComparable<Book>, IComparable
     {
         #region Public Properties 
         public string Author { get; }
@@ -55,8 +55,20 @@ namespace BookService
 
         public int CompareTo(Book other)
         {
-            if (other == null) return 1;
+            if (ReferenceEquals(other, null)) return 1;
             return Author.CompareTo(other.Author);
+        }
+
+        int IComparable.CompareTo(object obj)
+        {
+            if (ReferenceEquals(obj, null))
+                return 1;
+
+            Book otherBook = obj as Book;
+            if (!ReferenceEquals(otherBook, null))
+                return CompareTo(otherBook);
+
+            throw new ArgumentNullException($"Object is not a {typeof(Book)}");
         }
 
         public override string ToString() => $"Author: {Author}, Title: {Title}, PagesNumber: {NumberPages}, Price: {Price}";

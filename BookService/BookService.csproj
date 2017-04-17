@@ -47,7 +47,10 @@
   <ItemGroup>
     <Compile Include="Book.cs" />
     <Compile Include="BookListService.cs" />
+    <Compile Include="ILogger.cs" />
     <Compile Include="IRepository.cs" />
+    <Compile Include="NLoggerAdapter.cs" />
+    <Compile Include="NLogProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

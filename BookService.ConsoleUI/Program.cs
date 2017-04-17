@@ -5,14 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using BookService;
 using System.IO;
+using NLog;
 
 namespace BookService.ConsoleUI
 {
     class Program
     {
+        public static readonly ILogger logger = NLogProvider.GetLogger("Logger");
+
         static void Main(string[] args)
         {
-            BookListService service = new BookListService(new BookFileRepository("TestBooksFile"));
+            BookListService service = new BookListService(new BookFileRepository("TestBooksFile"), logger);
 
             if (!File.Exists("TestBooksFile"))
                 service.AddBooks(new List<Book> {
