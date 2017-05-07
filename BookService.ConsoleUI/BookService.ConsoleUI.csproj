@@ -48,6 +48,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BookFileRepository.cs" />
+    <Compile Include="BookSerializedRepository.cs" />
+    <Compile Include="BookXMLRepository.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

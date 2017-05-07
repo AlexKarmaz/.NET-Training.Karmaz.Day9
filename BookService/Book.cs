@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace BookService
 {
+    [Serializable]
     public class Book : IEquatable<Book>, IComparable<Book>, IComparable
     {
         #region Public Properties 
